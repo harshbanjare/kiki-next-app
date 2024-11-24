@@ -47,6 +47,20 @@ const Sidebar: React.FC<SidebarProps> = ({
     { name: "Enigma", color: "#683D2C" },
   ];
 
+  const handleMinPriceChange = (value: number) => {
+    const newMin = Math.max(0, value);
+    if (newMin <= priceRange[1]) {
+      setPriceRange([newMin, priceRange[1]]);
+    }
+  };
+
+  const handleMaxPriceChange = (value: number) => {
+    const newMax = Math.max(0, value);
+    if (newMax >= priceRange[0]) {
+      setPriceRange([priceRange[0], newMax]);
+    }
+  };
+
   return (
     <div className="w-full bg-white p-4">
       <div className={`${showFilters ? "block" : "hidden lg:block"}`}>
@@ -81,18 +95,16 @@ const Sidebar: React.FC<SidebarProps> = ({
               <input
                 type="number"
                 value={priceRange[0]}
-                onChange={(e) =>
-                  setPriceRange([Number(e.target.value), priceRange[1]])
-                }
+                onChange={(e) => handleMinPriceChange(Number(e.target.value))}
+                min="0"
                 className="w-1/2 px-3 py-2 bg-white border-b border-gray-300 focus:outline-none focus:border-b-black transition-colors duration-300"
               />
               <span>-</span>
               <input
                 type="number"
                 value={priceRange[1]}
-                onChange={(e) =>
-                  setPriceRange([priceRange[0], Number(e.target.value)])
-                }
+                onChange={(e) => handleMaxPriceChange(Number(e.target.value))}
+                min="0"
                 className="w-1/2 px-3 py-2 bg-white border-b border-gray-300 focus:outline-none focus:border-b-black transition-colors duration-300"
               />
             </div>
