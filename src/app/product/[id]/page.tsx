@@ -13,6 +13,7 @@ import { products } from "@/data/products";
 import { useCart } from "@/context/useCart";
 import { useShade } from "@/context/useShade";
 import Link from "next/link";
+import { Metadata } from "next";
 
 // Add this sanitization function
 const sanitizeInput = (input: string): string => {
